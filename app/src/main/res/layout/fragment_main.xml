@@ -6,14 +6,21 @@
     android:orientation="vertical"
     tools:context=".ui.MainFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tragos"></TextView>
+    <RelativeLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        >
 
-    <Button
-        android:text="irDetalles"
-        android:id="@+id/btn_ir_detalles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Button>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"></ProgressBar>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tragos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

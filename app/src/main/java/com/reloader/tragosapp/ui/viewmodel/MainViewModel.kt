@@ -18,5 +18,5 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
         }
     }
 
-    //https://www.youtube.com/watch?v=Ce5AVfIGxV4
+
 }

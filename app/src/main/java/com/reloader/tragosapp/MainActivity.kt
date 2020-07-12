@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     // no se puede instanciar sino creas un factory
 
-    private val viewModel by viewModels<MainViewModel> {
-        VMFactory(RepoImpl(DataSource()))
-    } // inyeccion de  dependencias
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

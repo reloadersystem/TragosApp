@@ -5,14 +5,14 @@ import com.reloader.tragosapp.vo.Resource
 
 class DataSource {
 
-    private val generateTragosList = listOf(
+     val generateTragosList = Resource.Success(listOf(
         Drink(
             "https://www.recetas-argentinas.com/base/stock/Recipe/2-image/2-image_web.jpg",
             "Margarita",
             "con azucar, vodka"
         ),
         Drink(
-            "https://www.deliargentina.com/image/cache/catalog/product/vino/americano-gancia-aperitivo/americano-gancia-aperitivo-600x315w.jpg",
+            "https://media.cnnchile.com/sites/2/2019/04/fernet-branca-740x430.jpg",
             "Fernet",
             "con coca"
         ),
@@ -25,14 +25,11 @@ class DataSource {
             "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT3a1WiMh1-ei_ThaWm2QrxBu-KPBvrQLGkzg&usqp=CAU",
             "Gancia",
             "Gancia con Sprite"
-        )
+        ))
 
     )
 
-    fun getTragosList(): Resource<List<Drink>> {
 
-        return Resource.Success(generateTragosList)
-    }
 
 
 }
