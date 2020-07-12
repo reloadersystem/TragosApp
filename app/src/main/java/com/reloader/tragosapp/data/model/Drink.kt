@@ -11,11 +11,15 @@ data class Drink(
     @SerializedName("strDrink")
     val nombre: String = "",
     @SerializedName("strInstructions")
-    val descripcion: String = ""
+    val descripcion: String = "",
+
+    @SerializedName("strAlcoholic")
+    val hasAlcohol: String = "Non_Alcoholic"
 ) : Parcelable
 // te permite enviar un objeto completo y lo podes utilizar para un bundle
 
 
 data class DrinkList(
     @SerializedName("drinks") //  es el contenedor JSONArray
-    val drinkList: List<Drink>)
+    val drinkList: List<Drink>
+)
