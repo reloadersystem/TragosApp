@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -48,6 +49,15 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()// viewLifecycleOwner cuando pasa el onDestroy del fragment  se elimina
+
+        setupSearchView()
+
+        setupObservers()
+
+    }
+
+
+    private fun setupObservers() {
         viewModel.fetchTragosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -56,7 +66,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    rv_tragos.adapter = MainAdapter(requireContext(), result.data,this)
+                    rv_tragos.adapter = MainAdapter(requireContext(), result.data, this)
                 }
 
                 is Resource.Failure -> {
@@ -89,5 +99,22 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
             )
         )
     }
+
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                viewModel.setTrago(query!!)
+                return false
+
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
+            }
+
+        })
+    }
+
 
 }

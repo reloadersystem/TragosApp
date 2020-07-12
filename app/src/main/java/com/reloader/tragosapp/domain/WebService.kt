@@ -9,8 +9,8 @@ interface WebService {
 
 
     // ya no pones un {} query hace un append es decir una variable
-    @GET("search.php?s=")
-    suspend fun getTragoByName(@Query("tragoName") tragoName: String): DrinkList
+    @GET("search.php?")
+    suspend fun getTragoByName(@Query("s") tragoName: String): DrinkList
 //hasta q no termina  ese codigo retorna algo
 
 }

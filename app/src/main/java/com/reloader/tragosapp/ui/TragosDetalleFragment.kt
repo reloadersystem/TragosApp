@@ -33,4 +33,6 @@ class TragosDetalleFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_tragos_detalle, container, false)
     }
+
+    //https://www.youtube.com/watch?v=X0U3Y0vqjcE&list=PLvOkTKyNiH8aOtUnOItM4yoJDFM7-2zO5&index=5&t=0s
 }
