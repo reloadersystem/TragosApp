@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.reloader.tragosapp.AppDatabase
 import com.reloader.tragosapp.R
 import com.reloader.tragosapp.data.DataSource
 import com.reloader.tragosapp.data.model.Drink
@@ -28,8 +29,8 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
 
-    private val viewModel by viewModels<MainViewModel> {
-        VMFactory(RepoImpl(DataSource()))
+    private val viewModel by activityViewModels<MainViewModel> {
+        VMFactory(RepoImpl(DataSource(AppDatabase.getDatabase(requireActivity().applicationContext))))
     } // inyeccion de  dependencias
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +54,10 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
         setupSearchView()
 
         setupObservers()
+
+        btn_ir_favoritos.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_favoritosFragment)
+        }
 
     }
 

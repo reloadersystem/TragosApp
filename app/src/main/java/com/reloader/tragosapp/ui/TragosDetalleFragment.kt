@@ -6,10 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.reloader.tragosapp.AppDatabase
 import com.reloader.tragosapp.R
+import com.reloader.tragosapp.data.DataSource
 import com.reloader.tragosapp.data.model.Drink
+import com.reloader.tragosapp.data.model.DrinkEntity
+import com.reloader.tragosapp.domain.RepoImpl
+import com.reloader.tragosapp.ui.viewmodel.MainViewModel
+import com.reloader.tragosapp.ui.viewmodel.VMFactory
 import kotlinx.android.synthetic.main.fragment_tragos_detalle.*
 
 /**
@@ -18,6 +26,15 @@ import kotlinx.android.synthetic.main.fragment_tragos_detalle.*
 class TragosDetalleFragment : Fragment() {
 
     private lateinit var drink: Drink
+
+//    private val viewModel by viewModels<MainViewModel> {
+//        VMFactory(RepoImpl(DataSource()))
+//    }
+
+    private val viewModel by activityViewModels<MainViewModel> {
+        // usamos activityModels para usar la misma instancia siempre
+        VMFactory(RepoImpl(DataSource(AppDatabase.getDatabase(requireActivity().applicationContext))))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +65,23 @@ class TragosDetalleFragment : Fragment() {
             txt_has_alcohol.text = "Bebida sin alcohol"
         } else {
             txt_has_alcohol.text = "Bebida con alcohol"
+        }
+
+
+        btn_guardar_trago.setOnClickListener {
+
+            viewModel.guardarTrago(
+                DrinkEntity(
+                    drink.tragoId,
+                    drink.imagen,
+                    drink.nombre,
+                    drink.descripcion,
+                    drink.hasAlcohol
+                )
+            )
+
+            Toast.makeText(requireContext(), "Se guardo el trago a favoritos", Toast.LENGTH_SHORT)
+                .show()
         }
 
 
