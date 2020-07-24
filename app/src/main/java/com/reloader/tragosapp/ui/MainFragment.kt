@@ -22,6 +22,7 @@ import com.reloader.tragosapp.ui.viewmodel.MainViewModel
 import com.reloader.tragosapp.ui.viewmodel.VMFactory
 import com.reloader.tragosapp.vo.Resource
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.text.FieldPosition
 
 /**
  * A simple [Fragment] subclass.
@@ -71,7 +72,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
 
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    rv_tragos.adapter = MainAdapter(requireContext(), result.data, this)
+                    rv_tragos.adapter = MainAdapter(requireContext(), result.data.toMutableList(), this)
                 }
 
                 is Resource.Failure -> {
@@ -89,7 +90,7 @@ class MainFragment : Fragment(), MainAdapter.OnTragoClickListener {
     }
 
 
-    override fun onTragoClick(drink: Drink) {
+    override fun onTragoClick(drink: Drink, position: Int) {
         val bundle = Bundle()
         bundle.putParcelable("drink", drink)
         //findNavController().navigate(R.id.tragosDetalleFragment, bundle)

@@ -12,13 +12,18 @@ import com.reloader.tragosapp.data.model.Drink
 import kotlinx.android.synthetic.main.tragos_row.view.*
 
 class MainAdapter(
-    private val context: Context, private val tragosList: List<Drink>
+    private val context: Context, private val tragosList: MutableList<Drink>
     , private val itemClickListener: OnTragoClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnTragoClickListener {
-        fun onTragoClick(drink: Drink)
+        fun onTragoClick(drink: Drink, position: Int)
+    }
+
+    fun deleteDrink(position: Int){
+        tragosList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -52,7 +57,7 @@ class MainAdapter(
             itemView.txt_titulo.text = item.nombre
             itemView.txt_descripcion.text = item.descripcion
 
-            itemView.setOnClickListener { itemClickListener.onTragoClick(item) }
+            itemView.setOnClickListener { itemClickListener.onTragoClick(item, position) }
         }
 
     }

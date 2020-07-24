@@ -8,6 +8,7 @@ import com.reloader.tragosapp.vo.Resource
 class RepoImpl(private val dataSource: DataSource) : Repo {
 
 
+
     override suspend fun getTragosList(tragoName: String): Resource<List<Drink>> {
 
         return dataSource.getTragoByName(tragoName)
@@ -19,5 +20,9 @@ return dataSource.getTragosFavoritos()
 
     override suspend fun insertTrago(trago: DrinkEntity) {
         dataSource.insertTragoIntoRoom(trago)
+    }
+
+    override suspend fun deleteDrink(drink: DrinkEntity) {
+        dataSource.deleteDrink(drink)
     }
 }

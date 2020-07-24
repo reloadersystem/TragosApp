@@ -22,5 +22,11 @@ class DataSource(private val appDatabase: AppDatabase) {
 
     }
 
+    suspend fun deleteDrink(drink: DrinkEntity) {
+
+        appDatabase.tragoDao().deleteDrink(drink)
+
+    }
+
 
 }
